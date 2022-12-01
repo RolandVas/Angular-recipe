@@ -1,6 +1,6 @@
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /*
 * So ist dieses Service überal verfügbar
@@ -36,9 +36,12 @@ export class RecipeService {
   /* man kann recipe auch statt privat publich machen und so könnte man direkt zugreifen,
   * aber laut udemy kurs gehört das so gemacht wie hier
   */
-  getRecipe() {
+  getRecipes() {
     return this.recipe
   }
 
-  recipeSelected = new EventEmitter<Recipe>()
+  getRecipe(id: number) {
+    return this.recipe[id]
+  }
+
 }
