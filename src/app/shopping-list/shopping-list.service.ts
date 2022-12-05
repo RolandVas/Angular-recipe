@@ -14,4 +14,16 @@ export class ShoppingListService {
   addIngridients (ingridients: Ingredient[]) {
     Array.prototype.push.apply(this.ingredients, ingridients)
   }
+
+  addIngredient(ingredient: Ingredient) {
+    this.ingredients.push(ingredient)
+  }
+
+  deleteIngredient(ingredient: Ingredient) {
+    this.ingredients.splice(this.ingredients.indexOf(ingredient), 1)
+  }
+
+  editIngredient(oldIngredient: Ingredient, newIngedient: Ingredient) {
+    this.ingredients[this.ingredients.indexOf(oldIngredient)] = newIngedient
+  }
 }
