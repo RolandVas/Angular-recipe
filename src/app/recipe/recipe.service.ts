@@ -48,4 +48,8 @@ export class RecipeService {
     this.recipe.splice(id, 1)
   }
 
+  addRecipe(recipe: Recipe) {
+    this.recipe.push(recipe)
+  }
+
 }

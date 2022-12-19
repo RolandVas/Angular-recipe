@@ -26,7 +26,7 @@
             <div class="row" style="margin-top: 16px;">
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-success">Speichern</button>
-                    <button type="button" class="btn btn-danger">Löschen</button>
+                    <button type="button" class="btn btn-danger" (click)="onDelete(form)" *ngIf="!isAdd">Löschen</button>
                     <button type="button" class="btn btn-primary" (click)="onClear(form)">Zurücksetzen</button>
                 </div>
             </div>

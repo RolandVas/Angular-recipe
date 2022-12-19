@@ -14,7 +14,7 @@ import { DropdownDirective } from './dropdown.directive';
 import { routing } from './app.routing';
 import { RecipeStartComponent } from './recipe/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     NgbModule,
     FormsModule,
-    routing
+    routing,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

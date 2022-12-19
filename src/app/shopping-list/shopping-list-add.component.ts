@@ -28,6 +28,11 @@ export class ShoppingListAddComponent implements OnInit, OnChanges {
     this.onClear(form)
   }
 
+  onDelete(form) {
+    this.sls.deleteIngredient(this.selectedIngredient)
+    this.onClear(form)
+  }
+
   onClear(form: NgForm) {
     this.cleard.emit()
     form.resetForm()
