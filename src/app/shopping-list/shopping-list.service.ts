@@ -11,8 +11,8 @@ export class ShoppingListService {
     return this.ingredients
   }
 
-  addIngridients (ingridients: Ingredient[]) {
-    Array.prototype.push.apply(this.ingredients, ingridients)
+  addIngridients (ingredients: Ingredient[]) {
+    Array.prototype.push.apply(this.ingredients, ingredients)
   }
 
   addIngredient(ingredient: Ingredient) {

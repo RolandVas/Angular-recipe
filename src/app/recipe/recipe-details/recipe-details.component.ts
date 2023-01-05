@@ -32,7 +32,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   onAddToList() {
-    this.sls.addIngridients(this.selectedRecipe?.ingridients)
+    this.sls.addIngridients(this.selectedRecipe?.ingredients)
   }
 
   onEdit() {

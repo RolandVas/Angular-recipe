@@ -5,7 +5,7 @@ export class Recipe {
       public name: string,
       public description: string,
       public imagePath: string,
-      public ingridients: Ingredient[],
+      public ingredients: Ingredient[],
     ) {
 
     }
