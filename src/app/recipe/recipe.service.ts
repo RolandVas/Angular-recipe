@@ -1,6 +1,7 @@
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 /*
 * So ist dieses Service überal verfügbar
@@ -12,6 +13,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class RecipeService {
+
+  recipeChanged = new EventEmitter<Recipe[]>()
+
+  url: string = 'https://udemy-rezept-default-rtdb.europe-west1.firebasedatabase.app/recipe.json'
+
+  constructor(private http: HttpClient) {}
+
   private recipe: Recipe[] = [
     new Recipe(
       'Schnitzel',
@@ -50,6 +58,24 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipe.push(recipe)
+  }
+
+  editRecipe(oldRecipe: Recipe, newRecipe: Recipe) {
+    this.recipe[this.recipe.indexOf(oldRecipe)] = newRecipe
+  }
+
+  storeData() {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.put<Recipe[]>(this.url, this.recipe, {headers});
+  }
+
+  fetchData() {
+    this.http.get<Recipe[]>(this.url)
+      .subscribe((data: Recipe[]) => {
+        this.recipe = data;
+        this.recipeChanged.emit(this.recipe);
+      });
+
   }
 
 }

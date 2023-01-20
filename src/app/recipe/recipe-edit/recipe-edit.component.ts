@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Recipe } from '../recipe.model';
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html'
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   recipeForm: FormGroup
   private recipeIndex: number
   private subscription: Subscription
@@ -24,8 +24,12 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     const newRecipe = this.recipeForm.value;
-    this.recipeService.addRecipe(newRecipe)
-    console.log(newRecipe)
+    if (this.isNew) {
+      this.recipeService.addRecipe(newRecipe)
+      console.log(newRecipe)
+    } else {
+      this.recipeService.editRecipe(this.recipe, newRecipe)
+    }
     this.onNavigateBack()
   }
 
@@ -45,7 +49,7 @@ export class RecipeEditComponent implements OnInit {
           this.recipeIndex = +params['id']
           this.recipe = this.recipeService.getRecipe(this.recipeIndex)
         } else {
-          this.isNew = false
+          this.isNew = true
           this.recipe = null;
         }
       }
@@ -91,6 +95,10 @@ export class RecipeEditComponent implements OnInit {
 
   onRemoveIngredientControl(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index)
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
 }
